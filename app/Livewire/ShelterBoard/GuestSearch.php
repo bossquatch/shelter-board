@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\ShelterBoard;
+namespace App\Livewire\ShelterBoard;
 
 use App\Models\ActivationShelter;
 use App\Models\Guest;
