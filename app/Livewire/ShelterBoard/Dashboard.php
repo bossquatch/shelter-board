@@ -5,27 +5,18 @@ namespace App\Livewire\ShelterBoard;
 use App\Models\Activation;
 use App\Models\ActivationShelter;
 use App\Models\OperationalLog;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
-    use AuthorizesRequests;
-
     public ?Activation $activation = null;
 
     public function mount(?int $activationId = null): void
     {
-        $this->authorize('viewAny', Activation::class);
-
         $this->activation = $activationId
             ? Activation::find($activationId)
             : Activation::where('status', 'Active')->latest('started_at')->first()
                 ?? Activation::latest()->first();
-
-        if ($this->activation) {
-            $this->authorize('view', $this->activation);
-        }
     }
 
     public function render()
